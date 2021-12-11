@@ -91,6 +91,10 @@
                 color: rgb(255,0,0);
                 display: none;
            }
+           
+        .signOut {
+            text-align: center;
+        }
     </style>
     
 </head>
@@ -161,7 +165,7 @@
             
         </div>  
         <br/><br/>
-        <button onclick="signOut()">Sign Out</button>
+        <button onclick="signOut()" class = "signOut">Sign Out</button>
         
         <script language = "javascript">
           function onSignIn(googleUser) {
