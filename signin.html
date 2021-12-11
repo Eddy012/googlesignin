@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content = "740752754043-hh1nre2il2oq56b5mdfd3ubbc4sb29li.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Slab">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+    <!-- NAVBAR STYLE -->
+    <link rel="stylesheet" href="nav_foot.css">  
+
+    <title>BillSplit - Sign In</title>
+    <style>
+        /* BUTTON STYLING */
+        .button {
+            font-family: "Roboto Slab";
+            padding: 0.45em 1em;
+            text-decoration: none;
+            background-color: var(--bg_purple);
+            color: var(--text_light);
+            font-weight: 400;
+            letter-spacing: 1px;
+            border-radius: 0.8em;
+            border-style: solid;
+            border-color: var(--text_dark);
+            border-width: 3px;
+            transition: 0.3s;
+            
+        }
+
+        .button:hover{
+            background: var(--text_green);
+        }
+        /* FORM STYLING */
+        .fillout {
+            width: 30ch;
+            color: #05386B;
+            font-family: "Roboto";
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1em;
+            margin: 1em;
+            border: 2px solid var(--text_dark_low_opacity);
+        }
+        .fillout div {
+            font-size: 20px;
+            display: flex;
+            flex-direction: row;
+        }
+        .fillout div p {
+            font-size: 12px;
+        }
+        .fillout div input {
+            font-size: 20px;
+            max-width: 30ch;
+        }
+        .fillout form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            max-width: 40ch;
+            list-style-type: disc;
+        }
+        .fillout {
+            padding: 0.5em;
+        }
+        .fillout h1 {
+            font-family: "Roboto Slab";
+        }
+        section {
+            padding-bottom: 1em;
+        }
+        @media screen and (max-width:300px) {
+            .fillout {
+                padding: 0.5em;
+                margin: 0.25em;
+            }
+            .fillout div {
+                font-size: 15px;
+            }
+            .fillout h1 {
+                font-size: 28px;
+            }
+        }
+        .verify {
+                color: rgb(255,0,0);
+                display: none;
+           }
+    </style>
+    
+</head>
+    
+<body>
+    <div id="pageContainer">
+        <!-- HEADER STUFF, CAN IGNORE -->
+        <nav>
+            <ul>
+            <a class="logos" href="index.html">
+                <span>
+                <li class="companyName">Billsplit</li>
+                <li class="logo"></li>
+                </span>
+            </a>
+            <li class="navItem attention"><a href="fullCalculator.html">Split a Receipt</a></li>
+            <li class="navItem signIn" name="guestItem"><a href="signin.html">Sign In</a></li>
+            
+            <li class="hamburger" onclick="toggleNav()" onmouseover="openNav()" onmouseout="closeNav()">
+                <i class="fa fa-bars"></i>
+                <i class="fa fa-close" style="display:none"></i>
+            </li>
+            </ul>
+        </nav>
+        <div id="dropdown">
+            <ul id="dropMenu" onclick="toggleNav()" onmouseover="openNav()" onmouseout="closeNav()">
+                <li class="navItem attention"><a href="fullCalculator.html">Split a Receipt</a></li>
+                <li class="navItem signIn" name="guestItem"><a href="signin.html">Sign In</a></li>
+                <li class="navItem user" name="userItem" ><a href="history.html">My History</a></li>
+                <li class="navItem"><a href="howto.html">How to use</a></li>
+                <li class="navItem"><a href="aboutUs.html">About</a></li>
+                <li class="navItem"><a href="contactUs.html">Contact Us</a></li>
+                <li class="navItem user" name="userItem" ><a href="logOut.html">Log Out</a></li>
+            </ul>
+        </div>
+
+        <!-- THIS SHOULD BE A LINK TO A SCRIPT THAT DETERMINES FROM COOKIES IF USER IS A GUEST
+                Note: must use a bool var called guestUser -->
+        <script src="guestUserLogic.js"></script>
+        <script src="nav_footLogic.js"></script>
+        <!-- ALL PAGE CONTENT HERE -->
+        <div style="width: 100%; display: flex; justify-content: center; padding-top: 150px;">
+            <div class="fillout">
+                <h1>Sign In</h1>
+                <div>
+                    <form name ="data" method="post" onsubmit="return validateSignIn()">
+                    <section style="padding-top: .75em;">
+                        <h2>Username: <input type="text"  name='username' placeholder="Username"/></h2>
+                    </section>
+                    <section>
+                        <h2>Password: <input type="password"  name='pass' placeholder="Password"/></h2>
+                        <p class = "verify" id = "logVal1">Please enter a username and password</p>
+                        <p class = "verify" id = "logVal2">Incorrect username or password</p>
+                    </section>
+                    <p style="text-align: center; padding-bottom: 1em;">Forgot your password? <a href=contactus.html>Contact us</a></p>
+                    <div style="width: 100%; display: flex; justify-content: center;">
+                    <input type = "submit" value = "Sign In" class="button"/>
+                    </div>
+                    <section>
+                        <p style="text-align: center; padding-top: 1em;">Don't have an account? <a href=signup.html>Sign up!</a></p>
+                    </section>
+                    <!-- TODO: Include signing it w/ Google -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class = "g-signin2" data-onsuccess="onSignIn">
+            
+        </div>  
+        <br/><br/>
+        <button onclick="signOut()">Sign Out</button>
+        
+        <script language = "javascript">
+          function onSignIn(googleUser) {
+          var profile = googleUser.getBasicProfile();
+          console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+          console.log('Name: ' + profile.getName());
+          console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+        
+        
+          function signOut(){
+            gapi.auth2.getAuthInstance().signOut().then(function() {
+              console.log('user signed out')
+            })
+          }
+        </script>
+                 
+        
+        <!-- FOOTER CAN IGNORE -->
+        <div class="footer">
+            <ul class="footerItems">
+                <li class="footerItem rightFoot"><a href="contactus.html">Contact Us</a></li>
+                <li class="footerItem"><a href="aboutUs.html">About</a></li>
+                <li class="footerItem"><a href="howto.html">How to use</a></li>
+                <li class="footerNotes">Billsplit 2021. Some Rights Reserved.</li>
+            </ul>
+        </div>
+    
+    </div>
+    
+</body>
+     <!-- Verifies user input -->
+     <script src="verifyInput.js"></script>  
+    
+       
+    
+
+</html>
